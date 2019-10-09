@@ -61,6 +61,7 @@
     "node": ">= 8.11"
   },
   "devDependencies": {
+    "@types/jest": "*",
     "@sentry/node": "5.5.0",
     "@types/ansi-escapes": "3.0.0",
     "@types/ansi-regex": "4.0.0",
