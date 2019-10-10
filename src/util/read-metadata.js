@@ -31,13 +31,13 @@ async function readMetaData(
   const hasNowJson = Boolean(nowConfig);
 
   if (pkg && pkg.now) {
-    // If the project has both a `now.json` and `now` Object in the `package.json`
+    // If the project has both a `config.json` and `now` Object in the `package.json`
     // file, then fail hard and let the user know that they need to pick one or the
     // other
     if (nowConfig) {
       const err = new Error(
         'You have a `now` configuration field inside `package.json` ' +
-          'but configuration is also present in `now.json`! ' +
+          'but configuration is also present in `config.json`! ' +
           "Please ensure there's a single source of configuration by removing one."
       );
       err.code = 'config_prop_and_file';
@@ -52,7 +52,7 @@ async function readMetaData(
     type = nowConfig.type;
   }
 
-  // If a deployment type hasn't been specified then retrieve it from now.json
+  // If a deployment type hasn't been specified then retrieve it from config.json
   if (!type && nowConfig && nowConfig.type) {
     type = nowConfig.type;
   }
@@ -127,7 +127,7 @@ async function readMetaData(
     throw err;
   }
 
-  // No name in `package.json` / `now.json`, or "name" label in Dockerfile.
+  // No name in `package.json` / `config.json`, or "name" label in Dockerfile.
   // Default to the basename of the root dir
   if (!name) {
     name = basename(path);

@@ -357,7 +357,7 @@ export async function docker(
     files = await getFilesInWhitelist(nowConfig.files, path, { output });
   } else {
     // Base search path
-    // the now.json `files` whitelist still
+    // the config.json `files` whitelist still
     // honors ignores: https://docs.npmjs.com/files/package.json#files
     const search_ = ['.'];
 

@@ -258,7 +258,7 @@ export default async function main(
   if (typeof localConfig.env !== 'undefined' && !isObject(localConfig.env)) {
     error(
       `The ${code('env')} property in ${highlight(
-        'now.json'
+        'config.json'
       )} needs to be an object`
     );
     return 1;
@@ -268,7 +268,7 @@ export default async function main(
     if (!isObject(localConfig.build)) {
       error(
         `The ${code('build')} property in ${highlight(
-          'now.json'
+          'config.json'
         )} needs to be an object`
       );
       return 1;
@@ -280,14 +280,14 @@ export default async function main(
     ) {
       error(
         `The ${code('build.env')} property in ${highlight(
-          'now.json'
+          'config.json'
         )} needs to be an object`
       );
       return 1;
     }
   }
 
-  // Merge dotenv config, `env` from now.json, and `--env` / `-e` arguments
+  // Merge dotenv config, `env` from config.json, and `--env` / `-e` arguments
   const deploymentEnv = Object.assign(
     {},
     parseEnv(localConfig.env),
@@ -297,7 +297,7 @@ export default async function main(
   // Enable debug mode for builders
   const buildDebugEnv = debugEnabled ? { NOW_BUILDER_DEBUG: '1' } : {};
 
-  // Merge build env out of  `build.env` from now.json, and `--build-env` args
+  // Merge build env out of  `build.env` from config.json, and `--build-env` args
   const deploymentBuildEnv = Object.assign(
     {},
     parseEnv(localConfig.build && localConfig.build.env),
@@ -540,7 +540,7 @@ function handleCreateDeployError(output, error) {
 
       output.error(
         `The property ${code(prop)} is not allowed in ${highlight(
-          'now.json'
+          'config.json'
         )} when using Now 2.0 – please remove it.`
       );
 
@@ -560,7 +560,7 @@ function handleCreateDeployError(output, error) {
 
       output.error(
         `The property ${code(prop)} in ${highlight(
-          'now.json'
+          'config.json'
         )} can only be of type ${code(title(params.type))}.`
       );
 
@@ -571,7 +571,7 @@ function handleCreateDeployError(output, error) {
 
     output.error(
       `Failed to validate ${highlight(
-        'now.json'
+        'config.json'
       )}: ${message}\nDocumentation: ${link}`
     );
 

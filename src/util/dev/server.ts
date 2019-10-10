@@ -485,14 +485,14 @@ export default class DevServer {
     isInitialLoad: boolean = false
   ): Promise<NowConfig> {
     if (canUseCache && this.cachedNowConfig) {
-      this.output.debug('Using cached `now.json` config');
+      this.output.debug('Using cached `config.json` config');
       return this.cachedNowConfig;
     }
 
     const pkg = await this.getPackageJson();
 
-    // The default empty `now.json` is used to serve all files as static
-    // when no `now.json` is present
+    // The default empty `config.json` is used to serve all files as static
+    // when no `config.json` is present
     let config: NowConfig = this.cachedNowConfig || { version: 2 };
 
     // We need to delete these properties for zero config to work
@@ -503,15 +503,15 @@ export default class DevServer {
     }
 
     try {
-      this.output.debug('Reading `now.json` file');
+      this.output.debug('Reading `config.json` file');
       const nowConfigPath = getNowConfigPath(this.cwd);
       config = JSON.parse(await fs.readFile(nowConfigPath, 'utf8'));
     } catch (err) {
       if (err.code === 'ENOENT') {
-        this.output.debug('No `now.json` file present');
+        this.output.debug('No `config.json` file present');
       } else if (err.name === 'SyntaxError') {
         this.output.warn(
-          `There is a syntax error in the \`now.json\` file: ${err.message}`
+          `There is a syntax error in the \`config.json\` file: ${err.message}`
         );
       } else {
         throw err;
@@ -625,7 +625,7 @@ export default class DevServer {
     env: EnvConfig = {},
     localEnv: EnvConfig = {}
   ): EnvConfig {
-    // Validate if there are any missing env vars defined in `now.json`,
+    // Validate if there are any missing env vars defined in `config.json`,
     // but not in the `.env` / `.build.env` file
     const missing: string[] = Object.entries(env)
       .filter(
@@ -1384,7 +1384,7 @@ export default class DevServer {
       .filter(p => {
         const base = basename(p);
         if (
-          base === 'now.json' ||
+          base === 'config.json' ||
           base === '.nowignore' ||
           !p.startsWith(prefix)
         ) {

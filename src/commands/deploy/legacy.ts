@@ -522,10 +522,10 @@ async function sync({
     let scale: DcScale = {};
     let dcIds: any;
 
-    // If there are regions coming from the args and now.json warn about it
+    // If there are regions coming from the args and config.json warn about it
     if (regions.length > 0 && getRegionsFromConfig(nowConfig).length > 0) {
       warn(
-        `You have regions defined from both args and now.json, using ${chalk.bold(
+        `You have regions defined from both args and config.json, using ${chalk.bold(
           regions.join(',')
         )}`
       );
@@ -622,7 +622,7 @@ async function sync({
       }
     }
 
-    // Merge dotenv config, `env` from now.json, and `--env` / `-e` arguments
+    // Merge dotenv config, `env` from config.json, and `--env` / `-e` arguments
     const deploymentEnv = Object.assign(
       {},
       dotenvConfig,
@@ -630,7 +630,7 @@ async function sync({
       parseEnv(argv.env, undefined)
     );
 
-    // Merge build env out of  `build.env` from now.json, and `--build-env` args
+    // Merge build env out of  `build.env` from config.json, and `--build-env` args
     const deploymentBuildEnv = Object.assign(
       {},
       parseEnv(nowConfig.build && nowConfig.build.env, null),
@@ -1104,7 +1104,7 @@ function handleCreateDeployError(output: Output, error: Error) {
 
       output.error(
         `The property ${code(prop)} is not allowed in ${highlight(
-          'now.json'
+          'config.json'
         )} when using Now 1.0 – please remove it.`
       );
 
@@ -1124,7 +1124,7 @@ function handleCreateDeployError(output: Output, error: Error) {
 
       output.error(
         `The property ${code(prop)} in ${highlight(
-          'now.json'
+          'config.json'
         )} can only be of type ${code(title(params.type))}.`
       );
 
@@ -1133,7 +1133,7 @@ function handleCreateDeployError(output: Output, error: Error) {
 
     output.error(
       `Failed to validate ${highlight(
-        'now.json'
+        'config.json'
       )}: ${message}\nDocumentation: ${link(
         'https://zeit.co/docs/v2/advanced/configuration'
       )}`

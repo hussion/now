@@ -1,6 +1,6 @@
 {
   "name": "@didi/fds-cli",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "preferGlobal": true,
   "description": "The CF Fullstack Develop Scaffold Based on Serverless.",
   "scripts": {

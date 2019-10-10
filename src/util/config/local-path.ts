@@ -17,7 +17,7 @@ const getLocalPathConfig = (prefix: string) => {
   }
 
   if (!customPath) {
-    return path.join(prefix, 'now.json');
+    return path.join(prefix, 'config.json');
   }
 
   return path.resolve(prefix, customPath);

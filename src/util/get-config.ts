@@ -31,8 +31,8 @@ export default async function getConfig(output: Output, configFile?: string) {
     }
   }
 
-  // Then try with now.json in the same directory
-  const nowFilePath = path.resolve(localPath, 'now.json');
+  // Then try with config.json in the same directory
+  const nowFilePath = path.resolve(localPath, 'config.json');
   const mainConfig = await readJSONFile(nowFilePath);
   if (mainConfig instanceof CantParseJSONFile) {
     return mainConfig;

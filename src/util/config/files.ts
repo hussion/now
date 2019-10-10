@@ -110,7 +110,7 @@ export function readLocalConfig(prefix: string = process.cwd()) {
   try {
     localConfigExists = existsSync(target);
   } catch (err) {
-    console.error(error('Failed to check if `now.json` exists'));
+    console.error(error('Failed to check if `config.json` exists'));
     process.exit(1);
   }
 
@@ -122,7 +122,7 @@ export function readLocalConfig(prefix: string = process.cwd()) {
         console.log(error(err.message));
       } else {
         const code = err.code ? `(${err.code})` : '';
-        console.error(error(`Failed to read the \`now.json\` file ${code}`));
+        console.error(error(`Failed to read the \`config.json\` file ${code}`));
       }
 
       process.exit(1);
