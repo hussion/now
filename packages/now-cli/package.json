@@ -60,6 +60,10 @@
   "engines": {
     "node": ">= 8.11"
   },
+  "dependencies": {
+    "@now/build-utils": "*",
+    "@now/routing-utils": "*"
+  },
   "devDependencies": {
     "@sentry/node": "5.5.0",
     "@types/ansi-escapes": "3.0.0",
