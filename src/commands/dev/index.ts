@@ -20,9 +20,9 @@ const COMMAND_CONFIG = {
 
 const help = () => {
   console.log(`
-  ${chalk.bold(`${logo} FDS DEV`)} [options] <dir>
+  ${chalk.bold(`${logo} FMD DEV`)} [options] <dir>
 
-  Starts the \`FDS DEV\` server.
+  Starts the \`FMD DEV\` server.
 
   ${chalk.dim('Options:')}
 
@@ -32,13 +32,13 @@ const help = () => {
 
   ${chalk.dim('Examples:')}
 
-  ${chalk.gray('–')} Start the \`FDS DEV\` server on port 8080
+  ${chalk.gray('–')} Start the \`FMD DEV\` server on port 8080
 
-      ${chalk.cyan('$ FDS DEV --listen 8080')}
+      ${chalk.cyan('$ FMD DEV --listen 8080')}
 
-  ${chalk.gray('–')} Make the \`FDS DEV\` server bind to localhost on port 5000
+  ${chalk.gray('–')} Make the \`FMD DEV\` server bind to localhost on port 5000
 
-      ${chalk.cyan('$ FDS DEV --listen 127.0.0.1:5000')}
+      ${chalk.cyan('$ FMD DEV --listen 127.0.0.1:5000')}
   `);
 };
 
@@ -96,7 +96,7 @@ export default async function main(ctx: NowContext) {
         output.error(
           `The ${cmd('dev')} script in ${cmd(
             'package.json'
-          )} must not contain ${cmd('FDS DEV')}`
+          )} must not contain ${cmd('FMD DEV')}`
         );
         output.error(`More details: http://err.sh/now/now-dev-as-dev-script`);
         return 1;
@@ -105,7 +105,7 @@ export default async function main(ctx: NowContext) {
   }
 
   if (argv._.length > 2) {
-    output.error(`${cmd('FDS DEV [dir]')} accepts at most one argument`);
+    output.error(`${cmd('FMD DEV [dir]')} accepts at most one argument`);
     return 1;
   }
 

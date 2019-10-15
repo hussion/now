@@ -8,7 +8,6 @@ import { maybeURL, normalizeURL, parseInstanceURL } from '../util/url';
 import printEvents from '../util/events';
 import wait from '../util/output/wait';
 import Client from '../util/client.ts';
-import getScope from '../util/get-scope.ts';
 
 const help = () => {
   console.log(`
@@ -148,18 +147,7 @@ export default async function main(ctx) {
     currentTeam,
     debug: debugEnabled,
   });
-  let contextName = null;
-
-  try {
-    ({ contextName } = await getScope(client));
-  } catch (err) {
-    if (err.code === 'NOT_AUTHORIZED' || err.code === 'TEAM_DELETED') {
-      output.error(err.message);
-      return 1;
-    }
-
-    throw err;
-  }
+  let contextName = '---- contextName'; // 临时值
 
   let deployment;
   const id = deploymentIdOrURL;

@@ -17,7 +17,7 @@ export default async function dev(
   args: string[],
   output: Output
 ) {
-  output.dim(`FDS CLI ${pkg.version} Started.`);
+  output.dim(`FMD CLI ${pkg.version} Started.`);
 
   const [dir = '.'] = args;
   const cwd = path.resolve(dir);

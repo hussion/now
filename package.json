@@ -1,8 +1,8 @@
 {
-  "name": "@didi/fds-cli",
-  "version": "1.0.5",
+  "name": "@didi/fmd-cli",
+  "version": "1.0.6",
   "preferGlobal": true,
-  "description": "The CF Fullstack Develop Scaffold Based on Serverless.",
+  "description": "The CF Fullstack Micro App Develop Scaffold Based on Serverless.",
   "scripts": {
     "preinstall": "node ./scripts/preinstall.js",
     "prepublishOnly": "yarn build",
@@ -30,7 +30,7 @@
     "all": true
   },
   "bin": {
-    "fds": "./dist/index.js"
+    "fmd": "./dist/index.js"
   },
   "files": [
     "dist",
@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "core-js": "^3.2.1",
-    "@sentry/node": "5.5.0",
+    "fsevents": "*",
     "@types/ansi-escapes": "3.0.0",
     "@types/ansi-regex": "4.0.0",
     "@types/async-retry": "1.2.1",

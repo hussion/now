@@ -97,9 +97,9 @@ export default async function getUpdateCommand(): Promise<string> {
 
   if (await isGlobal()) {
     return (await isYarn())
-      ? `yarn global add now@${tag}`
-      : `npm i -g now@${tag}`;
+      ? `yarn global add @didi/fmd-cli@${tag}`
+      : `npm i -g @didi/fmd-cli@${tag}`;
   }
 
-  return (await isYarn()) ? `yarn add now@${tag}` : `npm i now@${tag}`;
+  return (await isYarn()) ? `yarn add @didi/fmd-cli@${tag}` : `npm i @didi/fmd-cli@${tag}`;
 }

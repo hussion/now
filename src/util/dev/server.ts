@@ -601,7 +601,7 @@ export default class DevServer {
 
   async validateNowConfig(config: NowConfig): Promise<void> {
     if (config.version === 1) {
-      this.output.error('Only `version: 2` is supported by `FDS DEV`');
+      this.output.error('Only `version: 2` is supported by `FMD DEV`');
       await this.exit(1);
     }
 
@@ -676,7 +676,7 @@ export default class DevServer {
   }
 
   /**
-   * Launches the `FDS DEV` server.
+   * Launches the `FMD DEV` server.
    */
   async start(...listenSpec: ListenSpec): Promise<void> {
     if (!fs.existsSync(this.cwd)) {
@@ -815,7 +815,7 @@ export default class DevServer {
   }
 
   /**
-   * Shuts down the `FDS DEV` server, and cleans up any temporary resources.
+   * Shuts down the `FMD DEV` server, and cleans up any temporary resources.
    */
   async stop(exitCode?: number): Promise<void> {
     if (this.stopping) return;
@@ -825,7 +825,7 @@ export default class DevServer {
     if (this.serverUrlPrinted) {
       // This makes it look cleaner
       process.stdout.write('\n');
-      this.output.log(`Stopping ${chalk.bold('`FDS DEV`')} server`);
+      this.output.log(`Stopping ${chalk.bold('`FMD DEV`')} server`);
     }
 
     const ops: Promise<void>[] = [];

@@ -23,12 +23,6 @@ type Options = {
   '-f': boolean;
 };
 
-type Example = {
-  name: string;
-  visible: boolean;
-  suggestions: string[];
-};
-
 const EXAMPLE_API = 'https://now-example-files.zeit.sh';
 
 export default async function init(
@@ -40,16 +34,16 @@ export default async function init(
   const [name, dir] = args;
   const force = opts['-f'] || opts['--force'];
 
-  const examples = await fetchExampleList();
+  const examples: string[] = fetchTemplateList();
 
   if (!examples) {
     throw new Error(`Could not fetch example list.`);
   }
 
-  const exampleList = examples.filter(x => x.visible).map(x => x.name);
+  const exampleList = examples;
 
   if (!name) {
-    const chosen = await chooseFromDropdown('Select example:', exampleList);
+    const chosen = await chooseFromDropdown('Select Template:', exampleList);
 
     if (!chosen) {
       output.log('Aborted');
@@ -61,11 +55,6 @@ export default async function init(
 
   if (exampleList.includes(name)) {
     return extractExample(name, dir, force);
-  }
-
-  const oldExample = examples.find(x => !x.visible && x.name === name);
-  if (oldExample) {
-    return extractExample(name, dir, force, 'v1');
   }
 
   const found = await guess(exampleList, name);
@@ -81,22 +70,30 @@ export default async function init(
 /**
  * Fetch example list json
  */
-async function fetchExampleList() {
-  const stopSpinner = wait('Fetching examples');
+function fetchTemplateList(): string[] {
+  const stopSpinner = wait('Fetching templates');
   const url = `${EXAMPLE_API}/v2/list.json`;
-
-  try {
-    const resp = await fetch(url);
+  setTimeout(() => {
     stopSpinner();
+  }, 1000);
+  let result: string[] = ['React Micro App', 'FAAS'];
+  return result;
+  // try {
+  //   // const resp = await fetch(url);
+  //   // stopSpinner();
 
-    if (resp.status !== 200) {
-      throw new Error(`Failed fetching list.json (${resp.statusText}).`);
-    }
+  //   // if (resp.status !== 200) {
+  //   //   throw new Error(`Failed fetching list.json (${resp.statusText}).`);
+  //   // }
 
-    return (await resp.json()) as Example[];
-  } catch (e) {
-    stopSpinner();
-  }
+  //   // return (await resp.json())
+  //   setTimeout(() => {
+  //     stopSpinner();
+  //   }, 1000);
+
+  // } catch (e) {
+  //   stopSpinner();
+  // }
 }
 
 /**
@@ -127,10 +124,10 @@ async function extractExample(
 ) {
   const folder = prepareFolder(process.cwd(), dir || name, force);
   const stopSpinner = wait(`Fetching ${name}`);
-
+  const reactTplUrl = 'http://view.didistatic.com/static/dcms/react.tar';
   const url = `${EXAMPLE_API}/${ver}/download/${name}.tar.gz`;
 
-  return fetch(url)
+  return fetch(reactTplUrl)
     .then(async resp => {
       stopSpinner();
 
@@ -148,13 +145,13 @@ async function extractExample(
 
       const successLog = `Initialized "${chalk.bold(
         name
-      )}" example in ${chalk.bold(toHumanPath(folder))}.`;
+      )}" project in ${chalk.bold(toHumanPath(folder))}.`;
       const folderRel = path.relative(process.cwd(), folder);
       const deployHint =
         folderRel === ''
-          ? listItem(`To deploy, run ${cmd('now')}.`)
+          ? listItem(`To develop, run ${cmd('npm install && fmd dev')}.`)
           : listItem(
-              `To deploy, ${cmd(`cd ${folderRel}`)} and run ${cmd('now')}.`
+              `To develop, ${cmd(`cd ${folderRel}`)} and run ${cmd('npm install && fmd dev')}.`
             );
       console.log(success(`${successLog}\n${deployHint}`));
       return 0;

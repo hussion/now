@@ -83,7 +83,7 @@ async function installYarn(output: Output): Promise<string> {
 
   if (process.platform === 'win32') {
     // The `yarn.cmd` file is necessary for `yarn` to be executable
-    // when running `FDS DEV` through cmd.exe
+    // when running `FMD DEV` through cmd.exe
     await writeFile(
       `${yarnBin}.cmd`,
       [

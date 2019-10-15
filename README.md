@@ -3,11 +3,11 @@
 **install**
 
 ```
-npm i -g @didi/fds-cli
+npm i -g @didi/fmd-cli
 ```
 
 **dev**
 
 ```
-fds dev
+fmd dev
 ```

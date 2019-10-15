@@ -96,7 +96,7 @@ async function main() {
   const dest = join(dirRoot, 'dist/runtimes');
   await cpy('**/*', dest, { parents: true, cwd: runtimes });
 
-  console.log('Finished building `fds-cli`');
+  console.log('Finished building `fmd-cli`');
 }
 
 process.on('unhandledRejection', (reason: any, promise: Promise<any>) => {
